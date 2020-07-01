@@ -3,32 +3,10 @@ title: "README"
 output: html_document
 ---
 
-## New master branch
 
-The following changes have been made in this branch which are added to the master branch:
+## Code to simulate data and run models described in the manuscript "Integrated species distribution models; a comparison of approaches under different data quality scenarios"
 
-1.	Default parameters in setParams changed to simulate unbiased sampling of the unstructured data and no environmental covariate
-
-2.	Unstructured models corrected to correctly use the expectation calculated from the mesh
-
-3.	Dimensions of grid increased to the same as the resolution of the grid (also changes to sigma2x and kappa defaults to provide a surface of reasonable complexity, added ability to specify sigma2x in data generation)
-
-4.	Validation changed to a) have the option for either absolute or relative validation b) show the truth on a grid for easier comparison c) present untransformed values
-
-5.	Function to generate prediction stack changed to provide different stacks for different model types
-
-6.	Added ability to change “quadrat” (i.e. site) size of the structured sample (qsize)
-
-7.	Added function to adjust for the quadrat/site size in structured model output – i.e. calculate the per-unit area occupancy probability from the occupancy probability in the quadrat/site
-
-
-## Code to run simulations for the IOFF project.
-
-This repository hosts functions to simulate structured and unstructured data and to run species distribution models on these to evaluate under which scenarios integrated/joint models perform better than individual dataset models. 
-
-This work is funded by the NERC International Opportunities Fund.
-
-An overview of the data generation, sampling and modelling can be found in [runall.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/runall.R)
+This repository hosts functions to simulate structured and unstructured data and to run species distribution models on these to evaluate under which scenarios integrated perform better than individual dataset models. Three integrated models are tested - joint likelihood, covariate and correlation following Pacifici *et al* (2017)
 
 
 
@@ -54,13 +32,17 @@ Scripts sourced by [Functions to generate data and sample.R](https://github.com/
 
 [sampleStructured.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/sampleStructured.R) : This function uses the output of 'genData.R' and the output of 'Generate strata levels Lam.R' to take stratified random points from the domain using the 'sampleStrata' function from 'Sample from strata.R' then creates structured presence/absence data by assessing overlap between the stratified random points (and the 5 by 5 neighbourhood around each point) and a new realisation from the point process generated with 'genData.R'.
 
+[sampleStructured - subsetting.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/sampleStructured%20-%20subsetting.R) : Function to create PA data when PA data are spatially restricted
+
 [Sample from strata.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/Sample%20from%20strata.R) : Function to sample points from random field. Samples can either be taken equally from strata ("Stratified" type), or with probablity dependent on given strata sampling probabilities ("Unstructured" type), or with probability inversely related to the strata sampling probabilities ("Intelligent" type). "Stratified" sampling most closely resembles structured surveys whereas "Intelligent" sampling simulates the potential to take more samples from areas where unstructured samples are less likely to be taken (i.e. an adaptive sampling strategy)
+
+[Sample from strata - subsetting.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/sampleStructured%20-%20subsetting.R) : Function to sample points when the PA data are spatially restricted
 
 ## Modelling
 
 [Run models.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/Run%20models.R) : This function runs an unstructured data only model in INLA. Data are modelled as point Poisson following the Simpson 2016 approach
 
-[Run models covariate for bias.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/Run%20models%20covariate%20for%20bias.R) : This function runs a unstructured data only model in INLA including a covariate on the bias in the data. Data are modelled as point Poisson following the Simpson 2016 approach
+[Run models unstructured bias covariate.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20models%20unstructured%20bias%20covariate.R) : This function runs a unstructured data only model in INLA including a covariate on the bias in the data. Data are modelled as point Poisson following the Simpson 2016 approach
 
 [Run models structured.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/Run%20models%20structured.R) : This function runs a structured data only SDM model in INLA. Data are assumed to come from a binomial distribution
 
@@ -68,75 +50,68 @@ Scripts sourced by [Functions to generate data and sample.R](https://github.com/
 
 [Run models joint covariate for bias.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/Run%20models%20joint%20covariate%20for%20bias.R) : This model adds a covariate for the bias in the unstructured data to the joint model described above.
 
-[run models joint second field.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/run%20models%20joint%20second%20field.R) : This joint model does not include a covariate on the bias in the unstructured data but instead includes a second spatial field with the aim that this spatial field can capture residual variation in the unstructured data that is not shared with the structured data.
+[Run correlation model - corrected.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20correlation%20model%20-%20corrected.R) : Function to implement the correlation model without bias covariate in INLA
+
+[Run correlation-bias model - corrected.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20correlation-bias%20model%20-%20corrected.R) : Function to implement the correlation model with bias covariate in INLA
+
+[Run cov model all eff prior.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20cov%20model%20all%20eff%20prior.R) : Function to implement the covariate model with or without bias covariate in INLA
 
 [validation_function.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/validation_function.R) : This function runs our validation procedures on any fitted model. Outputs produced are: PLOT - of the truth inc data, predicted mean intensity, standard deviation of predicted intensity, and the relative differences between estimate and truth. SUMMARY_RESULTS - the beginnings of an output table. List includes MAE, model name, all differences, the worst performing grid squares, and the best (i.e. lowest relative difference).
 
-## Parallel code
+[validation_function for correlation.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/validation_function%20for%20correlation.R) : Function above adapted for the correlation model
 
-Scripts that run models in a parallel format.
+[Create prediction stack for correlation model.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Create%20prediction%20stack%20for%20correlation%20model.R) : Function to create prediction stack for use in the correlation model
 
-[run_function_multiple.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/run_function_multiple.R) : This function has the option to run structured, unstructured or joint models with validation steps and returns absolute and relative validation as well as truth and predicted datasets.
-
-[run_scenario.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/run_scenario.R) : A function to run models in parallel based on a scenario. It automatically saves out the model results from validation.
-
-[scenario_sample_size.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/scenario_sample_size.R) : This script runs and saves the output from all models for the structured sample size scenario. 
-
-[scenario_abundance.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/scenario_abundance.R) : This script runs and saves the output from all models for the low abundance scenario.
-
-[scenario_bias.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/scenario_bias.R) : This script runs and saves the output from all models for the high bias scenario.
-
-[scenario_correlation](https://github.com/NERC-CEH/IOFFsimwork/blob/master/scenario_correlation.R) : This script runs and saves the output from all models for the correlated environment and bias scenario.
-
-[parallel_summary.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/parallel_summary.R) : This script creates a summary from the output from the run_function_multiple.R script.
-
-[Evaluation_structured_n.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/Evaluation_structured_n.R) : This script runs all models for the structured sample size scenario, produces figures and tables. Will be reworked to be a function to run any of the scenarios we want.
-
-## Steps to code
+[Create prediction stack.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Create%20prediction%20stack.R) : Create prediction stack for INLA model
 
 
-These steps are largely taken from the pipeline diagram  
+## Scenarios
+
+[simulation_study_newscenario.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_newscenario.R) : Code to run through PA coverage simulations
+
+[simulation_study_newscenario_JASMIN](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_newscenario_JASMIN.R) : Code adapted to run on JASMIN HPC
+
+[simulation_study_repeat.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_repeat.R) : Code to run through bias and large sample size simulations
+
+[simulation_study_repeat_JASMIN.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_repeat_JASMIN.R) : Code to run large sample size scenario on JASMIN
+
+[simulation_study_repeat_JASMIN_biased.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_repeat_JASMIN_biased.R) : Code to run biased scenario on JASMIN
+
+[simulation_study_repeat_JASMIN_default.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_repeat_JASMIN_default.R) : Code to run default scenario on JASMIN
+
+[simulation_study_repeat_JASMIN_unbiased.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/simulation_study_repeat_JASMIN_unbiased.R) : Code to run unbiased scenario on JASMIN
+
+## Processing
+
+[collate results JASMIN.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/collate%20results%20JASMIN.R) : Code to process results of first set of simulation runs on JASMIN
+
+[collate new scenario results JASMIN.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/collate%20new%20scenario%20results%20JASMIN.R) : Code to process results of PA coverage simulation runs on JASMIN
+
+[collate results for plots.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/collate%20results%20for%20plots.R) : Script to collate results from different scenarios for plots
+
+[correlate MAE and rho.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/correlate%20MAE%20and%20rho.R) : Check whether rho and MAE are correlated in the correlation model
+
+[covariate correlation plots.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/covariate%20correlation%20plots.R) : Replicate plots from Sarah's thesis
 
 
-### Data generation
+## Figures
 
- 
-- [x] Simulate an intensity surface with ability to change lambda (abundance) and the size and shape of the area (currently rectangular to test code is correct)   
-- [x] Simulate an intensity surface with environmental covariate effect     
+[figure 2.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/figure%202.R) : Code to create figure 2
 
-### Sampling
+[figure 3.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/figure%202.R) : Code to create figure 3
 
-
-- [x] Simulate taking different numbers of structured samples (currently these are stratified to ensure equal coverage of the space and randomly sampled within strata mimicking real world sampling designs). Currently uses arbitrary neighbourhood - may want to change this too    
-- [x] Simulate taking different numbers of unstructured samples  
-- [x] Simulate spatial bias in unstructured sampling (currently this uses the strata to determine a probability of visit which is used to thin the point process, may want to change this to make a continuous spatial effort surface)  
-- [x] Allow spatial bias in unstructured sampling (i.e. effort) to vary (this can be adjusted currently by changing stratum sampling probabilities)   
-- [x] Allow spatial bias in unstructured sampling to be correlated with an environmental covariate  
-
-These are now lower priority:  
-- [ ] Allow coverage of structured survey to change  
-- [ ] Vary coverage in relation to environmental gradient length
-- [ ] Allow detection probability to vary non-spatially in structured data  
-- [ ] Allow detection probability to vary non-spatially in unstructured data  
-
-### Modelling
+[plot mid section results.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/plot%20mid%20section%20resutls.R) : code to create SI figures
 
 
-- [x] Model for structured data only  
-- [x] Model for unstructured data only  
-- [x] Joint model with continuous data  
-- [x] Allow models to have different knowledge of covariates  
-- [x] Allow models to have a second spatial field  
+## Shiny dashboards
+
+[shinydashboard - NewScenario.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/shinydashboard%20-%20NewScenario.R) : Explore results of limited PA coverage simulations
+
+[shinydashboard - simulation.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/shinydashboard%20-%20simulation.R) : Explore results of bias simulations
 
 
-### Evaluation
+## Job files
 
-
-- [x] Extract and compare parameters (covariate effects...) 
-- [x] Mean absolute error by grid
-- [x] Correlation by grid
-- [x] Visual bias inspection  
- 
-
+Files ending .job give the run parameters for the LOTUS cluster on JASMIN
 
 
