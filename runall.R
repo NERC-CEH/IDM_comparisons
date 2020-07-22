@@ -95,21 +95,21 @@ par(mfrow=c(2,2))
 par(mar=c(2,4,3,5))
 
 #env
-image.plot(list(x=dat1$Lam$xcol, y=dat1$Lam$yrow, z=t(dat1$gridcov)), main='Environmental \ncovariate', asp=1, col = viridis(50))
+image.plot(list(x=dat1$Lam$xcol, y=dat1$Lam$yrow, z=t(dat1$gridcov)), main='a) Environmental \ncovariate', asp=1, col = viridis(50))
 
 #intensity
-image.plot(list(x=dat1$Lam$xcol, y=dat1$Lam$yrow, z=t(dat1$rf.s)), main='Species intensity \n(log-Lambda)', asp=1, col  = viridis(50))
+image.plot(list(x=dat1$Lam$xcol, y=dat1$Lam$yrow, z=t(dat1$rf.s)), main='b) Species intensity \n(log-Lambda)', asp=1, col  = viridis(50))
 
 #strata
 #par(mar=c(4,4,4,7))
 palette(viridis(50))
-plot(biasfield$y ~ biasfield$x, col = biasfield$stratprobs*100, cex = 3, pch = 15, ylab = NA)
+plot(biasfield$y ~ biasfield$x, col = biasfield$stratprobs*100, cex = 3, pch = 15, ylab = NA, main = "c) Detection \nprobability")
 par(xpd = TRUE)
 legend(106,100, col = c(50,40,30,20,10), pch = 20, legend = c("0.4-0.5", "0.3-0.4", "0.2-0.3", "0.1-0.2", "0.01-0.1"), title = "Probability")
 
 #data
 par(mar=c(2,4,2,5))
-image(list(x=dat1$Lam$xcol, y=dat1$Lam$yrow, z=t(dat1$rf.s)), main='Simulated data', asp=1, col = viridis(50)) 
+image(list(x=dat1$Lam$xcol, y=dat1$Lam$yrow, z=t(dat1$rf.s)), main='d) Simulated data', asp=1, col = viridis(50)) 
 points(unstructured_data$x, unstructured_data$y, pch = 20, col = "grey")#note rescale again - plotting back on original
 points(structured_data$x,structured_data$y, pch = 21, bg = structured_data$presence, col = "black")
 par(xpd = TRUE)
