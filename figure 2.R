@@ -17,7 +17,7 @@ p1 <- ggplot(sub1, aes(y = MAE, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "MAE \n", tag = "(a)") +
-  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Covariate","jointcov" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
+  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Informed prior","jointcov" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
   theme_classic()+
   ylim(0,6)+
   theme(legend.position = "none") +
@@ -38,7 +38,7 @@ p2 <- ggplot(sub2, aes(y = MAE, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "MAE\n", tag = "(b)") +
-  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Covariate","joint" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
+  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Informed prior","joint" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
   ylim(0,6)+
   theme_classic()+ 
   theme(legend.position = "top") +
@@ -56,7 +56,7 @@ p3 <- ggplot(sub1, aes(y = correlation, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Correlation", tag = "(c)") +
-  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Covariate","jointcov" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
+  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Informed prior","jointcov" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
   theme_classic()+
   theme(legend.position = "none") +
   theme(axis.text.x = element_blank(),
@@ -74,7 +74,7 @@ p4 <- ggplot(sub2, aes(y = correlation, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Correlation", tag = "(d)") +
-  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Covariate","joint" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
+  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Informed prior","joint" = "Joint likelihood", "structured" = "PA only", "unstructuredcov" = "PO only"))+
   theme_classic()+
   theme(legend.position = "none") +
   theme(axis.text.x = element_blank(),
@@ -93,7 +93,7 @@ p5 <- ggplot(sub1e, aes(y = mean, x = model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Coefficient estimate\n", x = "Model", tag = "(e)") +
-  scale_x_discrete(labels=c("correlationbias" = "Correlation", "covariatebias" = "Covariate","jointbias" = "Joint likelihood", "structured" = "PA only", "unstructuredbias" = "PO only"))+
+  scale_x_discrete(labels=c("correlationbias" = "Correlation", "covariatebias" = "Informed prior","jointbias" = "Joint likelihood", "structured" = "PA only", "unstructuredbias" = "PO only"))+
   ylim(-6,9)+
   theme_classic()+
   theme(legend.position = "none") +
@@ -113,7 +113,7 @@ p6 <- ggplot(sub2e, aes(y = mean, x = model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Coefficient estimate\n", x = "Model" , tag = "(f)") +
-  scale_x_discrete(labels=c("correlation" = "Correlation", "covariate" = "Covariate","joint" = "Joint likelihood", "structured" = "PA only", "unstructured" = "PO only"))+
+  scale_x_discrete(labels=c("correlation" = "Correlation", "covariate" = "Informed prior","joint" = "Joint likelihood", "structured" = "PA only", "unstructured" = "PO only"))+
   ylim(-6,9)+
   theme_classic()+
   theme(legend.position = "none") +
@@ -143,7 +143,7 @@ p7 <- grid.arrange(p1, p2, p3, p4, p5, p6, leg, ncol=2, nrow = 4,
              layout_matrix = rbind(c(1,2),c(3,4), c(5,6), c(7,7)),
              widths = c(2.7, 2.7), heights = c(2, 2, 3.3, 0.2))
 
-ggsave("Figure 2 v3.png", p7, device = "png", width = 15, height = 18.5, units = "cm")
+ggsave("Figure 2 v4.png", p7, device = "png", width = 15, height = 18.5, units = "cm")
 
 
 
@@ -156,7 +156,7 @@ p1l <- ggplot(sub1l, aes(y = MAE, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "MAE \n", tag = "(a)") +
-  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Covariate","jointcov" = "Joint likelihood", "structured" = "Structured only", "unstructuredcov" = "Unstructured only"))+
+  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Informed prior","jointcov" = "Joint likelihood", "structured" = "Structured only", "unstructuredcov" = "Unstructured only"))+
   ylim(0,6) +
   theme_classic()+
   theme(legend.position = "bottom") +
@@ -171,7 +171,7 @@ p3l <- ggplot(sub1l, aes(y = correlation, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Correlation", tag = "(b)") +
-  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Covariate","jointcov" = "Joint likelihood", "structured" = "Structured only", "unstructuredcov" = "Unstructured only"))+
+  scale_x_discrete(labels=c("correlationbias_str" = "Correlation", "covariatebias" = "Informed prior","jointcov" = "Joint likelihood", "structured" = "Structured only", "unstructuredcov" = "Unstructured only"))+
   theme_classic()+
   theme(legend.position = "none") +
   theme(axis.text.x = element_blank(),
@@ -187,7 +187,7 @@ p5l <- ggplot(sub1el, aes(y = mean, x = model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Coefficient estimate\n", x = "Model", tag = "(c)") +
-  scale_x_discrete(labels=c("correlationbias" = "Correlation", "covariatebias" = "Covariate","jointbias" = "Joint likelihood", "structured" = "PA only", "unstructuredbias" = "PO only"))+
+  scale_x_discrete(labels=c("correlationbias" = "Correlation", "covariatebias" = "Informed prior","jointbias" = "Joint likelihood", "structured" = "PA only", "unstructuredbias" = "PO only"))+
   ylim(-6,9)+
   theme_classic()+
   theme(legend.position = "none") +
@@ -217,7 +217,7 @@ p4l <- grid.arrange(p1l, p3l, p5l, legl, ncol=1, nrow = 4,
                    layout_matrix = rbind(c(1),c(2), c(3), c(4)),
                    widths = c(2.7), heights = c(2, 2, 3.3, 0.2))
 
-ggsave("Large scenario v2.png", p4l, device = "png", width = 15, height = 18.5, units = "cm")
+ggsave("Large scenario v3.png", p4l, device = "png", width = 15, height = 18.5, units = "cm")
 
 
 
@@ -228,7 +228,7 @@ p1l <- ggplot(sub2l, aes(y = MAE, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "MAE \n", tag = "(a)") +
-  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Covariate","joint" = "Joint likelihood", "structured" = "Structured only", "unstructured" = "Unstructured only"))+
+  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Informed prior","joint" = "Joint likelihood", "structured" = "Structured only", "unstructured" = "Unstructured only"))+
   ylim(0,6) +
   theme_classic()+
   theme(legend.position = "bottom") +
@@ -243,7 +243,7 @@ p3l <- ggplot(sub2l, aes(y = correlation, x = Model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Correlation", tag = "(b)") +
-  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Covariate","joint" = "Joint likelihood", "structured" = "Structured only", "unstructured" = "Unstructured only"))+
+  scale_x_discrete(labels=c("correlation_str" = "Correlation", "covariate" = "Informed prior","joint" = "Joint likelihood", "structured" = "Structured only", "unstructured" = "Unstructured only"))+
   theme_classic()+
   theme(legend.position = "none") +
   theme(axis.text.x = element_blank(),
@@ -259,7 +259,7 @@ p5l <- ggplot(sub2el, aes(y = mean, x = model), group = Scenario) +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Coefficient estimate\n", x = "Model", tag = "(c)") +
-  scale_x_discrete(labels=c("correlation" = "Correlation", "covariate" = "Covariate","joint" = "Joint likelihood", "structured" = "PA only", "unstructured" = "PO only"))+
+  scale_x_discrete(labels=c("correlation" = "Correlation", "covariate" = "Informed prior","joint" = "Joint likelihood", "structured" = "PA only", "unstructured" = "PO only"))+
   ylim(-6,9)+
   theme_classic()+
   theme(legend.position = "none") +
@@ -289,5 +289,5 @@ p4l <- grid.arrange(p1l, p3l, p5l, legl, ncol=1, nrow = 4,
                     layout_matrix = rbind(c(1),c(2), c(3), c(4)),
                     widths = c(2.7), heights = c(2, 2, 3.3, 0.2))
 
-ggsave("Large scenario plot 2 v2.png", p4l, device = "png", width = 15, height = 18.5, units = "cm")
+ggsave("Large scenario plot 2 v3.png", p4l, device = "png", width = 15, height = 18.5, units = "cm")
 
