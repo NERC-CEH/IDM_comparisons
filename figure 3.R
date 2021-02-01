@@ -104,7 +104,7 @@ p5 <- ggplot(sub1e, aes(y = mean, x = model), group = section) +
         axis.text = element_text(size = 10),
         axis.title = element_text(size = 10),
         plot.tag = element_text(size = 10))+
-  geom_hline(yintercept = 1.2, linetype = "dashed")
+  geom_hline(yintercept = 1.2, size = 0.7)
 
 ##bias cov absent, env
 
@@ -125,7 +125,7 @@ p6 <- ggplot(sub2e, aes(y = mean, x = model), group = section) +
         axis.text = element_text(size = 10),
         axis.title = element_text(size = 10),
         plot.tag = element_text(size = 10))+
-  geom_hline(yintercept = 1.2, linetype = "dashed")
+  geom_hline(yintercept = 1.2, size = 0.7)
 
 
 
@@ -147,6 +147,6 @@ p7 <- grid.arrange(p1, p3, p2, p4, p5, p6, leg, ncol=2, nrow = 4,
                    layout_matrix = rbind(c(1,2),c(3,4), c(5,6), c(7,7)),
                    widths = c(2.7, 2.7), heights = c(2, 2, 3.3, 0.2))
 
-ggsave("Figure 3 v3.png", p7, device = "png", width = 15, height = 18.5, units = "cm")
+ggsave("Figure 3 v4.png", p7, device = "png", width = 15, height = 18.5, units = "cm")
 
 

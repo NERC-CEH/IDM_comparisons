@@ -103,13 +103,13 @@ p5 <- ggplot(sub1e, aes(y = mean, x = model), group = Scenario) +
         axis.text = element_text(size = 10),
         axis.title = element_text(size = 10),
         plot.tag = element_text(size = 10))+
-  geom_hline(yintercept = 1.2, linetype = "dashed")
+  geom_hline(yintercept = 1.2,  col = "black", size = 0.7)
 
 ##bias cov absent, env
 
 sub2e <- env_res[env_res$model %in% c("structured", "unstructured", "joint", "covariate", "correlation")& env_res$Scenario != "Large",]
 
-p6 <- ggplot(sub2e, aes(y = mean, x = model), group = Scenario) +
+p6 <- ggplot(sub2e, aes(y = mean, x = model), group = Scenario)  +
   geom_boxplot(aes(fill = Scenario), outlier.shape = NA) +
   #facet_wrap(. ~ section, scales = "free") +
   labs(fill = "Scenario", y = "Coefficient estimate\n", x = "Model" , tag = "(f)") +
@@ -123,8 +123,8 @@ p6 <- ggplot(sub2e, aes(y = mean, x = model), group = Scenario) +
         axis.text = element_text(size = 10),
         axis.title = element_text(size = 10),
         plot.tag = element_text(size = 10))+
-  geom_hline(yintercept = 1.2, linetype = "dashed")
-
+  geom_hline(yintercept = 1.2, col = "black", size = 0.7)
+#, lty = "41"
 get_legend<-function(myggplot){
   tmp <- ggplot_gtable(ggplot_build(myggplot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
@@ -143,7 +143,7 @@ p7 <- grid.arrange(p1, p2, p3, p4, p5, p6, leg, ncol=2, nrow = 4,
              layout_matrix = rbind(c(1,2),c(3,4), c(5,6), c(7,7)),
              widths = c(2.7, 2.7), heights = c(2, 2, 3.3, 0.2))
 
-ggsave("Figure 2 v4.png", p7, device = "png", width = 15, height = 18.5, units = "cm")
+ggsave("Figure 2 v5.png", p7, device = "png", width = 15, height = 18.5, units = "cm")
 
 
 
