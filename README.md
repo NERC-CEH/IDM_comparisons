@@ -3,6 +3,8 @@ title: "README"
 output: html_document
 ---
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4555755.svg)](https://doi.org/10.5281/zenodo.4555755)
+
 
 ## Code to simulate data and run models described in the manuscript "Integrated species distribution models; a comparison of approaches under different data quality scenarios"
 
