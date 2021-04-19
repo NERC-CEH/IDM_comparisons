@@ -8,7 +8,7 @@ output: html_document
 
 ## Code to simulate data and run models described in the manuscript "Integrated species distribution models; a comparison of approaches under different data quality scenarios"
 
-This repository hosts functions to simulate structured and unstructured data and to run species distribution models on these to evaluate under which scenarios integrated perform better than individual dataset models. Three integrated models are tested - joint likelihood, covariate and correlation following Pacifici *et al* (2017)
+This repository hosts functions to simulate structured and unstructured data and to run species distribution models on these to evaluate under which scenarios integrated perform better than individual dataset models. Three integrated models are tested - joint likelihood, informed prior and correlation following Pacifici *et al* (2017)
 
 
 
@@ -56,7 +56,7 @@ Scripts sourced by [Functions to generate data and sample.R](https://github.com/
 
 [Run correlation-bias model - corrected.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20correlation-bias%20model%20-%20corrected.R) : Function to implement the correlation model with bias covariate in INLA
 
-[Run cov model all eff prior.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20cov%20model%20all%20eff%20prior.R) : Function to implement the covariate model with or without bias covariate in INLA
+[Run cov model all eff prior.R](https://github.com/NERC-CEH/IDM_comparisons/blob/master/Run%20cov%20model%20all%20eff%20prior.R) : Function to implement the informed prior model with or without bias covariate in INLA
 
 [validation_function.R](https://github.com/NERC-CEH/IOFFsimwork/blob/master/validation_function.R) : This function runs our validation procedures on any fitted model. Outputs produced are: PLOT - of the truth inc data, predicted mean intensity, standard deviation of predicted intensity, and the relative differences between estimate and truth. SUMMARY_RESULTS - the beginnings of an output table. List includes MAE, model name, all differences, the worst performing grid squares, and the best (i.e. lowest relative difference).
 
